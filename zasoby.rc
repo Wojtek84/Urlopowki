@@ -1,0 +1,85 @@
+#include <windows.h>
+#include "Resource.h"
+
+IDD_ABOUT_DLG DIALOGEX 20, 20, 220, 66
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "O programie..."
+FONT 10, "MS Sans Serif"
+ {
+ 	LTEXT " ", 405, 0, 0, 220, 66
+	LTEXT "Aplikacja Urlopówki v. 2.0", IDC_Line1, 10, 10, 200, 10
+	LTEXT "Copyright mgr. in¿. Wojciech Pawe³ Opydo, Kwiecieñ 2020", IDC_Line2, 10, 30, 200, 10
+	PUSHBUTTON "Zamknij", IDB_EXIT, 10, 50, 50, 10
+ } 
+
+ikona ICON "tir.ico"
+
+mymenu MENU
+{
+	MENUITEM "Zakoñcz", 101
+	POPUP "Firmy"
+    {
+    MENUITEM "Zmieñ dane firmy", 102
+    MENUITEM "Dodaj now¹ firmê", 112 
+    }
+    POPUP "Kierowcy"
+    {
+    MENUITEM "Zmieñ dane kierowcy", 103
+    MENUITEM "Dodaj nowego kierowce", 113
+	}
+    MENUITEM "O Programie", 104
+}
+
+IDD_DaneFirmyDlg DIALOGEX 20, 20, 400, 140
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dane firmy"
+FONT 10, "MS Sans Serif"
+ {
+ 	LTEXT " ", 1000, 0, 0, 400, 140 
+	LTEXT "Nazwa: ", w1c, 10, 10, 150, 10
+    EDITTEXT  w1v, 50, 10, 330, 10
+    LTEXT "Ulica: ", w2c, 10, 20, 150, 10
+    EDITTEXT  w2v, 50, 20, 330, 10
+    LTEXT "Numer: ", w3c, 10, 30, 150, 10
+    EDITTEXT  w3v, 50, 30, 330, 10
+    LTEXT "Miasto: ", w4c, 10, 40, 150, 10
+    EDITTEXT  w4v, 50, 40, 330, 10
+    LTEXT "Kod: ", w5c, 10, 50, 150, 10
+    EDITTEXT  w5v, 50, 50, 330, 10
+    LTEXT "W³aœciciel: ", w6c, 10, 60, 150, 10
+    EDITTEXT  w6v, 50, 60, 330, 10
+    LTEXT "Telefon: ", w7c, 10, 70, 150, 10
+    EDITTEXT  w7v, 50, 70, 330, 10
+    LTEXT "e-mail: ", w8c, 10, 80, 150, 10
+    EDITTEXT  w8v, 50, 80, 330, 10
+    LTEXT "fax: ", w9c, 10, 90, 150, 10
+    EDITTEXT  w9v, 50, 90, 330, 10
+    LTEXT "Kraj: ", w10c, 10, 100, 150, 10
+    EDITTEXT  w10v, 50, 100, 330, 10
+	PUSHBUTTON "Zapisz", IDB_SAVE, 10, 120, 50, 10
+	PUSHBUTTON "Anuluj", IDB_CANCEL, 60, 120, 50, 10
+ } 
+
+IDD_DaneKierowcyDlg DIALOGEX 20, 20, 360, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dane kierowcy"
+FONT 10, "MS Sans Serif"
+ {
+ 	LTEXT " ", 2000, 0, 0, 400, 140 
+	LTEXT "Imiê i nazwisko: ", p1c, 10, 10, 150, 10
+    EDITTEXT  p1v, 70, 10, 280, 10
+    LTEXT "Data urodzenia: ", p2c, 10, 20, 150, 10
+    EDITTEXT  p2v, 70, 20, 280, 10
+    LTEXT "Nr prawa jazdy: ", p3c, 10, 30, 150, 10
+    EDITTEXT  p3v, 70, 30, 280, 10
+    LTEXT "Zatrudniony od: ", p4c, 10, 40, 150, 10
+    EDITTEXT  p4v, 70, 40, 280, 10
+    //EDITTEXT  p5v, 70, 50, 280, 10
+    LTEXT "Firma: ", p5c, 10, 50, 150, 10
+    //COMBOBOX p5va, 70, 50, 280, 10
+    PUSHBUTTON "Zapisz", IDB_SAVE2, 10, 70, 50, 10
+	PUSHBUTTON "Anuluj", IDB_CANCEL2, 60, 70, 50, 10
+ } 
+ 
+ 
+ 
