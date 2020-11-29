@@ -1,6 +1,6 @@
 # Urlopowki
-# Kod prostej aplikacji umożliwiającej przygotowanie zaświadczenia o nieprowadzeniu pojazdów dla kierowców zawodowych. 
+# Kod prostej aplikacji umożliwiającej przygotowanie zaświadczenia o nieprowadzeniu pojazdów zgodnie z rozporządzeniem Rady UE nr 165/2015
 # 
 #  - Aplikacja napisana  w języky C++.
-#  - Wykorzystano bazę danych SQLite.
+#  - Aplikacja wykorzystuje bazę danych SQLite.
 #
