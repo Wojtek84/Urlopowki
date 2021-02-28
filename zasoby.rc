@@ -8,7 +8,7 @@ FONT 10, "MS Sans Serif"
  {
  	LTEXT " ", 405, 0, 0, 220, 66
 	LTEXT "Aplikacja Urlopówki v. 2.0", IDC_Line1, 10, 10, 200, 10
-	LTEXT "Copyright mgr. in¿. Wojciech Pawe³ Opydo, Kwiecieñ 2020", IDC_Line2, 10, 30, 200, 10
+	LTEXT "Copyright mgr. in¿. Wojciech Pawe³ Opydo, Luty 2021", IDC_Line2, 10, 30, 200, 10
 	PUSHBUTTON "Zamknij", IDB_EXIT, 10, 50, 50, 10
  } 
 
