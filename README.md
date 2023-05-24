@@ -10,4 +10,4 @@
 
 #OS: Windows 64bit
 
-#Application contains example sqlite database with fictional data and compilation requires SQLite3 library
+#Application contains example sqlite database with fictional data and compilation requires SQLite3.dll linked
