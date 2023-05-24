@@ -1,16 +1,16 @@
-#include <windows.h>
-#include <fstream>
-#include <winuser.h>
-#include <string.h>    
-#include <wingdi.h>   
-#include <Windowsx.h> 
+#include <windows.h>  //standard windows compilator library
+#include <fstream>    //standard windows compilator library
+#include <winuser.h>  //standard windows compilator library
+#include <string.h>   //standard windows compilator library
+#include <wingdi.h>   //standard windows compilator library
+#include <Windowsx.h> //standard windows compilator library
 #include "driver.h"   
 #include "speditor.h"  
-#include <commctrl.h> 
+#include <commctrl.h> //standard windows compilator library
 #include "message.h"  
 #include "resource.h" 
 #include "archive.h"
-#include <sqlite3.h> 
+#include "sqlite3.h"
 
 //main classes 
 driver TheDriver;
@@ -33,7 +33,7 @@ int new_add_s;
 
 using namespace std;
 
-int loadSpeditor(void *data, int argc, char **argv, char **azColName) // £adowanie wierszy do tabeli zbiorczej
+int loadSpeditor(void *data, int argc, char **argv, char **azColName) // Â£adowanie wierszy do tabeli zbiorczej
 {
     strcpy(TheSpeditor.id, argv[0]);       //id
 	strcpy(TheSpeditor.name, argv[1]);     //nazwa
@@ -41,7 +41,7 @@ int loadSpeditor(void *data, int argc, char **argv, char **azColName) // £adowan
 	strcpy(TheSpeditor.number, argv[3]);   //numer
     strcpy(TheSpeditor.city, argv[4]);     //miasto
     strcpy(TheSpeditor.postal, argv[5]);   //kod
-    strcpy(TheSpeditor.owner, argv[6]);    //w³aœciciel
+    strcpy(TheSpeditor.owner, argv[6]);    //wÂ³aÅ“ciciel
     strcpy(TheSpeditor.phone, argv[7]);    //telefon
     strcpy(TheSpeditor.email, argv[8]);    //email
     strcpy(TheSpeditor.fax, argv[9]);      //fax
@@ -49,32 +49,32 @@ int loadSpeditor(void *data, int argc, char **argv, char **azColName) // £adowan
 	return 0;
 }
 
-int loadDriver(void *data, int argc, char **argv, char **azColName) // £adowanie wierszy do tabeli zbiorczej
+int loadDriver(void *data, int argc, char **argv, char **azColName) // Â£adowanie wierszy do tabeli zbiorczej
 {
 	strcpy(TheDriver.id, argv[0]);       //id
 	strcpy(TheDriver.name, argv[1]);     //Imie i nazwisko
 	strcpy(TheDriver.birth, argv[2]);    //data urodzenia
 	strcpy(TheDriver.jobstart, argv[3]); //data zatrudnienia
-    strcpy(TheDriver.nrdoc, argv[4]);    //numer dokumentów
+    strcpy(TheDriver.nrdoc, argv[4]);    //numer dokumentÃ³w
     strcpy(TheDriver.company, argv[5]);  //firma id
 	return 0;
 }
 
-int loadComboDriver(void *data, int argc, char **argv, char **azColName) // £adowanie wierszy listy kierowców
+int loadComboDriver(void *data, int argc, char **argv, char **azColName) // Â£adowanie wierszy listy kierowcÃ³w
 {
 	int iCount = SendMessage(cb_driver, CB_GETCOUNT, 0, 0);
     SendMessage(cb_driver, CB_ADDSTRING, iCount, (LPARAM) argv[0]);
 	return 0;
 }
 
-int loadComboSpeditor(void *data, int argc, char **argv, char **azColName) // £adowanie wierszy do listy firm w oknie danych kierowcy
+int loadComboSpeditor(void *data, int argc, char **argv, char **azColName) // Â£adowanie wierszy do listy firm w oknie danych kierowcy
 { 
     int iCounlb_2 = SendMessage(cb_speditor, CB_GETCOUNT, 0, 0);	
     SendMessage(cb_speditor, CB_ADDSTRING, iCounlb_2, (LPARAM) argv[0]);	
     return 0;
 }
 
-int loadArchive(void *data, int argc, char **argv, char **azColName)  //³adowanie danych z archiwum
+int loadArchive(void *data, int argc, char **argv, char **azColName)  //Â³adowanie danych z archiwum
 {
 	SetWindowText(eb_startdate,argv[0]);
 	SetWindowText(eb_enddate,argv[1]);
@@ -316,7 +316,7 @@ switch(fcode)
             sqlite3_free(zErrMsg);
 	   }
 	   break;
-  case 3: //Lista kierowców 
+  case 3: //Lista kierowcÃ³w 
        SendMessage(cb_driver, CB_ADDSTRING, 0, (LPARAM) nItem);
        sql = "SELECT `name` FROM `drivers`";
 	   rc = sqlite3_exec(db, sql, loadComboDriver, 0, &zErrMsg);
@@ -505,7 +505,7 @@ LRESULT CALLBACK DlgSpeditorProc(HWND dhwnd, UINT Msg, WPARAM wParam, LPARAM lPa
 			 GetDlgItemText(dhwnd, 2019, (LPSTR)&t_val, 100); //kod
              strcpy(TheSpeditor.postal, t_val);
 		
-			 GetDlgItemText(dhwnd, 2021, (LPSTR)&t_val, 100);  //w³aœciciel
+			 GetDlgItemText(dhwnd, 2021, (LPSTR)&t_val, 100);  //wÂ³aÅ“ciciel
              strcpy(TheSpeditor.owner, t_val);
 			  
 			 GetDlgItemText(dhwnd, 2023, (LPSTR)&t_val, 100);  //telefon
@@ -627,7 +627,7 @@ LRESULT CALLBACK DlgDriverProc(HWND phwnd, UINT Msg, WPARAM wParam, LPARAM lPara
 				EndDialog( phwnd, 1); 
 				break;
 			case 3009: 
-			 GetDlgItemText(phwnd, 3011, (LPSTR)&t_val, 100);  //Imiê i Nazwisko
+			 GetDlgItemText(phwnd, 3011, (LPSTR)&t_val, 100);  //ImiÃª i Nazwisko
              strcpy(TheDriver.name, t_val);
              
 			 GetDlgItemText(phwnd, 3013, (LPSTR)&t_val, 100); //Data urodzenia
@@ -769,7 +769,7 @@ if(PrintStatus == 1)
                DOCINFO docInfo;
                ZeroMemory(& docInfo, sizeof(docInfo));
                docInfo.cbSize = sizeof(docInfo);
-               docInfo.lpszDocName = "Urlopówka";
+               docInfo.lpszDocName = "UrlopÃ³wka";
                r = StartDoc(pPDX->hDC, & docInfo);
                SetMapMode(pPDX->hDC, MM_LOMETRIC);
                if(r != SP_ERROR)
@@ -808,108 +808,108 @@ if(PrintStatus == 1)
                    HFONT TNR6_S = CreateFont(FT6, 0, 0, 0, 0, 0, 0, 0, EASTEUROPE_CHARSET, 0, 0, 0, 0, "Times New Roman");
                    
                    SelectObject(pPDX->hDC, TNR12_BU);
-                   TextOut(pPDX->hDC, 1049, -180, "ZA£¥CZNIK", 9);
+                   TextOut(pPDX->hDC, 1049, -180, "ZAÂ£Â¥CZNIK", 9);
                    SelectObject(pPDX->hDC, TNR9);
-                   TextOut(pPDX->hDC, 1049, -250, "ZAŒWIADCZENIE O DZIA£ALNOŒCI", 28);
+                   TextOut(pPDX->hDC, 1049, -250, "ZAÅ’WIADCZENIE O DZIAÂ£ALNOÅ’CI", 28);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 1340, -245, "1", 1);
                    SelectObject(pPDX->hDC, TNR9);
-                   TextOut(pPDX->hDC, 1047, -290, "(ROZPORZ¥DZENIE (WE) 561/2006 LUB AETR",38);
+                   TextOut(pPDX->hDC, 1047, -290, "(ROZPORZÂ¥DZENIE (WE) 561/2006 LUB AETR",38);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 1407, -285, "2", 1);
                    SelectObject(pPDX->hDC, TNR9);  
                    TextOut(pPDX->hDC, 1418, -290, ")", 1); 
-                   TextOut(pPDX->hDC, 1049, -345, "Nale¿y wype³niæ na komputerze lub maszynowo i podpisaæ przed rozpoczêciem podró¿y. Nale¿y przechowywaæ wraz z", 109);
-                   TextOut(pPDX->hDC, 1049, -380, "oryginalnymi zapisami urz¹dzeñ kontrolnych zgodnie z odpowiednimi wymogami", 74);
+                   TextOut(pPDX->hDC, 1049, -345, "NaleÂ¿y wypeÂ³niÃ¦ na komputerze lub maszynowo i podpisaÃ¦ przed rozpoczÃªciem podrÃ³Â¿y. NaleÂ¿y przechowywaÃ¦ wraz z", 109);
+                   TextOut(pPDX->hDC, 1049, -380, "oryginalnymi zapisami urzÂ¹dzeÃ± kontrolnych zgodnie z odpowiednimi wymogami", 74);
                    SelectObject(pPDX->hDC, TNR9_B);
-                   TextOut(pPDX->hDC, 1049, -420, "SFA£SZOWANIE ZAŒWIADCZENIA STANOWI NARUSZENIE PRZEPISÓW", 55);
+                   TextOut(pPDX->hDC, 1049, -420, "SFAÂ£SZOWANIE ZAÅ’WIADCZENIA STANOWI NARUSZENIE PRZEPISÃ“W", 55);
                    SelectObject(pPDX->hDC, TNR9); 
                    Rectangle(pPDX->hDC, 200, -500, 1900, -(23*line_h+500));
                    SetTextAlign(pPDX->hDC, TA_LEFT);
                    SelectObject(pPDX->hDC, TNR9_B);
-                   TextOut(pPDX->hDC, 220, -520, "Czêœæ wype³niana przez przedsiêbiorstwo", 39); 
+                   TextOut(pPDX->hDC, 220, -520, "CzÃªÅ“Ã¦ wypeÂ³niana przez przedsiÃªbiorstwo", 39); 
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*1), "(1)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*1), "Nazwa przedsiêbiorstwa:", 23);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*1), "Nazwa przedsiÃªbiorstwa:", 23);
                    TextOut(pPDX->hDC, 725, -520-(line_h*1), TheSpeditor.name, strlen(TheSpeditor.name));
                    TextOut(pPDX->hDC, 220, -520-(line_h*2), "(2)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*2), "Ulica i numer, kod pocztowy, miejscowoœc, pañstwo:", 50);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*2), "Ulica i numer, kod pocztowy, miejscowoÅ“c, paÃ±stwo:", 50);
                    TextOut(pPDX->hDC, 1105, -520-(line_h*2), s_line, s_line_size);
                    TextOut(pPDX->hDC, 220, -520-(line_h*3), "(3)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*3), "Numer telefonu (w tym miêdzynarodowy numer kierunkowy):", 55);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*3), "Numer telefonu (w tym miÃªdzynarodowy numer kierunkowy):", 55);
                    TextOut(pPDX->hDC, 1225, -520-(line_h*3), TheSpeditor.phone, strlen(TheSpeditor.phone));
                    TextOut(pPDX->hDC, 220, -520-(line_h*4), "(4)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*4), "Numer faksu (w tym miêdzynarodowy numer kierunkowy):", 52);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*4), "Numer faksu (w tym miÃªdzynarodowy numer kierunkowy):", 52);
                    TextOut(pPDX->hDC, 1190, -520-(line_h*4), TheSpeditor.fax, strlen(TheSpeditor.fax));
                    TextOut(pPDX->hDC, 220, -520-(line_h*5), "(5)", 3);
                    TextOut(pPDX->hDC, 370, -520-(line_h*5), "Adres email:", 12);
                    TextOut(pPDX->hDC, 562, -520-(line_h*5), TheSpeditor.email, strlen(TheSpeditor.email));
                    SelectObject(pPDX->hDC, TNR9_B);
-                   TextOut(pPDX->hDC, 220, -520-(line_h*6), "Ja, ni¿ej podpisany:", 20); 
+                   TextOut(pPDX->hDC, 220, -520-(line_h*6), "Ja, niÂ¿ej podpisany:", 20); 
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*7), "(6)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*7), "Imiê i nazwisko:", 16);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*7), "ImiÃª i nazwisko:", 16);
                    TextOut(pPDX->hDC, 610, -520-(line_h*7), TheSpeditor.owner, strlen(TheSpeditor.owner));
                    TextOut(pPDX->hDC, 220, -520-(line_h*8), "(7)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*8), "Stanowisko w przedsiêbiorstwie:", 31);
-                   TextOut(pPDX->hDC, 830, -520-(line_h*8), "w³aœciciel", 10);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*8), "Stanowisko w przedsiÃªbiorstwie:", 31);
+                   TextOut(pPDX->hDC, 830, -520-(line_h*8), "wÂ³aÅ“ciciel", 10);
                    SelectObject(pPDX->hDC, TNR9_B);
-                   TextOut(pPDX->hDC, 220, -520-(line_h*9), "oœwiadczam, ¿e kierowca:", 24);
+                   TextOut(pPDX->hDC, 220, -520-(line_h*9), "oÅ“wiadczam, Â¿e kierowca:", 24);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*10), "(8)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*10), "Imiê i nazwisko:", 16);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*10), "ImiÃª i nazwisko:", 16);
                    TextOut(pPDX->hDC, 610, -520-(line_h*10), TheDriver.name, strlen(TheDriver.name));
                    TextOut(pPDX->hDC, 220, -520-(line_h*11), "(9)", 3);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*11), "Data urodzenia (dzieñ-miesi¹c-rok):", 35);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*11), "Data urodzenia (dzieÃ±-miesiÂ¹c-rok):", 35);
                    TextOut(pPDX->hDC, 880, -520-(line_h*11), TheDriver.birth, 10);
                    TextOut(pPDX->hDC, 220, -520-(line_h*12), "(10)", 4);
                    TextOut(pPDX->hDC, 370, -520-(line_h*12), "Numer prawa jazdy lub dowodu osobistego lub paszportu:", 54);
                    TextOut(pPDX->hDC, 1180, -520-(line_h*12), TheDriver.nrdoc, strlen(TheDriver.nrdoc));
                    TextOut(pPDX->hDC, 220, -520-(line_h*13), "(11)", 4);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*13), "który rozpocz¹³ pracê w przedsiêbiorstwie dnia (dzieñ-miesi¹c-rok:", 66);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*13), "ktÃ³ry rozpoczÂ¹Â³ pracÃª w przedsiÃªbiorstwie dnia (dzieÃ±-miesiÂ¹c-rok:", 66);
                    TextOut(pPDX->hDC, 1300, -520-(line_h*13), TheDriver.jobstart, strlen(TheDriver.jobstart));
                    SelectObject(pPDX->hDC, TNR9_B);
                    TextOut(pPDX->hDC, 220, -520-(line_h*14), "w okresie:", 10);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*15), "(12)", 4);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*15), "od (godzina-dzieñ-miesi¹c-rok):", 31);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*15), "od (godzina-dzieÃ±-miesiÂ¹c-rok):", 31);
                    TextOut(pPDX->hDC, 820, -520-(line_h*15), TheArchive.astart, strlen(TheArchive.astart));
                    TextOut(pPDX->hDC, 220, -520-(line_h*16), "(13)", 4);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*16), "od (godzina-dzieñ-miesi¹c-rok):", 31);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*16), "od (godzina-dzieÃ±-miesiÂ¹c-rok):", 31);
                    TextOut(pPDX->hDC, 820, -520-(line_h*16), TheArchive.akoniec, strlen(TheArchive.akoniec));
                    TextOut(pPDX->hDC, 220, -520-(line_h*17), "(14)", 4);
                    Rectangle(pPDX->hDC, 308, -525-(line_h*17), 338, -525-(line_h*17)-30);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*17), "przebywa³ na zwolnieniu lekarskim", 33);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*17), "przebywaÂ³ na zwolnieniu lekarskim", 33);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 851, -520-(line_h*17)+5, "***", 3);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*18), "(15)", 4);
                    Rectangle(pPDX->hDC, 308, -525-(line_h*18), 338, -525-(line_h*18)-30);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*18), "przebywa³ na urlopie wypoczynkowym", 34);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*18), "przebywaÂ³ na urlopie wypoczynkowym", 34);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 900, -520-(line_h*18)+5, "***", 3);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*19), "(16)", 4);
                    Rectangle(pPDX->hDC, 308, -525-(line_h*19), 338, -525-(line_h*19)-30);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*19), "mia³ czas wolny lub odpoczywa³", 30);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*19), "miaÂ³ czas wolny lub odpoczywaÂ³", 30);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 812, -520-(line_h*19)+5, "***", 3);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*20), "(17)", 4);
                    Rectangle(pPDX->hDC, 308, -525-(line_h*20), 338, -525-(line_h*20)-30);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*20), "prowadzi³ pojazd wy³¹czony z zakresu stosowania rozporz¹dzenia (WE) 165/2009 lub AETR", 85);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*20), "prowadziÂ³ pojazd wyÂ³Â¹czony z zakresu stosowania rozporzÂ¹dzenia (WE) 165/2009 lub AETR", 85);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 1634, -520-(line_h*20)+5, "***", 3);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*21), "(18)", 4);
                    Rectangle(pPDX->hDC, 308, -525-(line_h*21), 338, -525-(line_h*21)-30);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*21), "wykonywa³ pracê inn¹ ni¿ prowadzenie pojazdu", 44);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*21), "wykonywaÂ³ pracÃª innÂ¹ niÂ¿ prowadzenie pojazdu", 44);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 1020, -520-(line_h*21)+5, "***", 3);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -520-(line_h*22), "(19)", 4);
                    Rectangle(pPDX->hDC, 308, -525-(line_h*22), 338, -525-(line_h*22)-30);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*22), "pozostawa³ w gotowoœci", 22);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*22), "pozostawaÂ³ w gotowoÅ“ci", 22);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 703, -520-(line_h*22)+5, "***", 3);
                    SelectObject(pPDX->hDC, TNR9);
@@ -921,35 +921,35 @@ if(PrintStatus == 1)
                    MoveToEx(pPDX->hDC, 308, yl1s-30, &old_point );
                    LineTo(pPDX->hDC, 338, yl1s);
                    TextOut(pPDX->hDC, 220, -520-(line_h*23), "(20)", 4);
-                   TextOut(pPDX->hDC, 370, -520-(line_h*23), "Miejscowoœæ:", 12);
+                   TextOut(pPDX->hDC, 370, -520-(line_h*23), "MiejscowoÅ“Ã¦:", 12);
                    TextOut(pPDX->hDC, 580, -520-(line_h*23), s_place, s_place_size);
                    TextOut(pPDX->hDC, 220, -520-(line_h*25)+35, "Podpis: ", 8);
                    SelectObject(pPDX->hDC, TNR9_U);
-                   TextOut(pPDX->hDC, 330, -520-(line_h*25)+35, "…………………………………………………", 19);
+                   TextOut(pPDX->hDC, 330, -520-(line_h*25)+35, "â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦", 19);
                    SelectObject(pPDX->hDC, TNR9);
                    TextOut(pPDX->hDC, 220, -510-(line_h*26), "(21)", 4);
-                   TextOut(pPDX->hDC, 370, -510-(line_h*26), "Ja, jako kierowca, potwierdzam, ¿e w wy¿ej wymienionym okresie nie prowadzi³em pojazdu wchodz¹cego w", 100);
-                   TextOut(pPDX->hDC, 370, -550-(line_h*26), "zakres stosowania rozporz¹dzenia (WE) nr 561/2009 lub AETR", 58);
+                   TextOut(pPDX->hDC, 370, -510-(line_h*26), "Ja, jako kierowca, potwierdzam, Â¿e w wyÂ¿ej wymienionym okresie nie prowadziÂ³em pojazdu wchodzÂ¹cego w", 100);
+                   TextOut(pPDX->hDC, 370, -550-(line_h*26), "zakres stosowania rozporzÂ¹dzenia (WE) nr 561/2009 lub AETR", 58);
                    TextOut(pPDX->hDC, 220, -550-(line_h*27), "(22)", 4);
-                   TextOut(pPDX->hDC, 370, -550-(line_h*27), "Miejscowoœæ:", 12);
+                   TextOut(pPDX->hDC, 370, -550-(line_h*27), "MiejscowoÅ“Ã¦:", 12);
                    TextOut(pPDX->hDC, 580, -550-(line_h*27), s_place, s_place_size);
                    TextOut(pPDX->hDC, 220, -550-(line_h*28), "Podpis kierowcy: ", 18);
                    SelectObject(pPDX->hDC, TNR9_U);
-                   TextOut(pPDX->hDC, 455, -550-(line_h*28), "…………………………………………………", 19);  
+                   TextOut(pPDX->hDC, 455, -550-(line_h*28), "â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦", 19);  
                    MoveToEx(pPDX->hDC, 220, -550-(line_h*32)-30, &old_point );
                    LineTo(pPDX->hDC, 750, -550-(line_h*32)-30);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 220, -550-(line_h*32)-35, "1", 1);
                    SelectObject(pPDX->hDC, TNR8);
-                   TextOut(pPDX->hDC, 260, -550-(line_h*32)-40, "Niniejszy formularz jest dostêpny w formie elektronicznej i przeznaczonej do druki na stronie internetowej: http://ec.europa.eu", 127);
+                   TextOut(pPDX->hDC, 260, -550-(line_h*32)-40, "Niniejszy formularz jest dostÃªpny w formie elektronicznej i przeznaczonej do druki na stronie internetowej: http://ec.europa.eu", 127);
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 220, -550-(line_h*32)-75, "2", 1);  
                    SelectObject(pPDX->hDC, TNR8);
-                   TextOut(pPDX->hDC, 260, -550-(line_h*32)-80, "Umowa europejska dotycz¹ca pracy za³óg pojazdów wykonuj¹cych miêdzynarodowe przewozy drogowe",92);   
+                   TextOut(pPDX->hDC, 260, -550-(line_h*32)-80, "Umowa europejska dotyczÂ¹ca pracy zaÂ³Ã³g pojazdÃ³w wykonujÂ¹cych miÃªdzynarodowe przewozy drogowe",92);   
                    SelectObject(pPDX->hDC, TNR6_S);
                    TextOut(pPDX->hDC, 220, -550-(line_h*32)-115, "***", 3);  
                    SelectObject(pPDX->hDC, TNR8);
-                   TextOut(pPDX->hDC, 260, -550-(line_h*32)-120, "Mo¿na wybraæ tylko jedn¹ z rubryk",33); 
+                   TextOut(pPDX->hDC, 260, -550-(line_h*32)-120, "MoÂ¿na wybraÃ¦ tylko jednÂ¹ z rubryk",33); 
                    r = EndPage(pPDX->hDC);
                       if( r > 0 )
                       {
@@ -1021,7 +1021,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
     hwnd = CreateWindowEx (
            0,                   /* Extended possibilites for variation */
            szClassName,         /* Classname */
-           "Urlopówki v2.1",       /* Title Text */
+           "UrlopÃ³wki v2.1",       /* Title Text */
            WS_DLGFRAME | WS_POPUPWINDOW, /* default window */
            CW_USEDEFAULT,       /* Windows decides the position */
            CW_USEDEFAULT,       /* where the window ends up on the screen */
@@ -1035,7 +1035,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
      
      hfont = CreateFont(30,0,0,0,700,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,CLIP_DEFAULT_PRECIS,0, VARIABLE_PITCH,TEXT("Times New Roman"));
      
-     lb_0 = CreateWindow("STATIC","URLOPÓWKI v2.1", WS_CHILD | WS_VISIBLE, 170, 5, 350, 25, hwnd, (HMENU)110, NULL, hwnd);  
+     lb_0 = CreateWindow("STATIC","URLOPÃ“WKI v2.1", WS_CHILD | WS_VISIBLE, 170, 5, 350, 25, hwnd, (HMENU)110, NULL, hwnd);  
      SendMessage(lb_0, WM_SETFONT,( WPARAM ) hfont, 0);
      rc_frame = CreateWindow("STATIC"," ", WS_CHILD | WS_VISIBLE | WS_BORDER, 10, 43, 524, 350, hwnd, (HMENU)111, NULL, hwnd); 
      lb_1 = CreateWindow("STATIC","Firma: ", WS_CHILD | WS_VISIBLE | SS_RIGHT, 15, 53, 80, 25, hwnd, (HMENU)11, NULL, hwnd);
@@ -1050,13 +1050,13 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
      lb_4 = CreateWindow("STATIC","Okres do: ", WS_CHILD | WS_VISIBLE | SS_RIGHT, 15, 145, 80, 25, hwnd, (HMENU)14, NULL, hwnd);
      eb_enddate = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT","00:00-00-00-0000", WS_CHILD | WS_VISIBLE | WS_BORDER | DTS_TIMEFORMAT, 110, 143, 140, 25, hwnd, (HMENU)4, NULL, hwnd);
      SendMessage(eb_enddate, DTM_SETFORMAT, (WPARAM)0 , (LPARAM) "HH:mm-dd-MM-yyyy"); 
-     lb_5 = CreateWindow("STATIC","Czynnoœæ: ", WS_CHILD | WS_VISIBLE | SS_RIGHT, 15, 177, 80, 25, hwnd, (HMENU)14, NULL, hwnd);
-     rb_1 = CreateWindowEx( 0, "BUTTON", "Przebywa³ na zwolnieniu chorobowym", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 173, 300, 30, hwnd, (HMENU)51, NULL, NULL );
-     rb_2 = CreateWindowEx( 0, "BUTTON", "Przebywa³ na urlopie wypoczynkowym", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 203, 300, 30, hwnd, (HMENU)52, NULL, NULL );
-     rb_3 = CreateWindowEx( 0, "BUTTON", "Mia³ czas wolny lub odpoczywa³", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON , 110, 233, 300, 30, hwnd, (HMENU)53, NULL, NULL );
-     rb_4 = CreateWindowEx( 0, "BUTTON", "Prowadzi³ pojazd wy³¹czony z zakresu stosowania rozporz¹dzenia (WE) nr 561/2006 lub AETR", WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTORADIOBUTTON , 110, 263,410, 40, hwnd, (HMENU)54, NULL, NULL );
-     rb_5 = CreateWindowEx( 0, "BUTTON", "Wykonywa³ pracê inn¹ ni¿ prowadzenie pojazdu", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 300, 350, 30, hwnd, (HMENU)55, NULL, NULL );
-     rb_6 = CreateWindowEx( 0, "BUTTON", "Pozostawa³ w gotowoœci", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 330, 300, 30, hwnd, (HMENU)56, NULL, NULL );
+     lb_5 = CreateWindow("STATIC","CzynnoÅ“Ã¦: ", WS_CHILD | WS_VISIBLE | SS_RIGHT, 15, 177, 80, 25, hwnd, (HMENU)14, NULL, hwnd);
+     rb_1 = CreateWindowEx( 0, "BUTTON", "PrzebywaÂ³ na zwolnieniu chorobowym", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 173, 300, 30, hwnd, (HMENU)51, NULL, NULL );
+     rb_2 = CreateWindowEx( 0, "BUTTON", "PrzebywaÂ³ na urlopie wypoczynkowym", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 203, 300, 30, hwnd, (HMENU)52, NULL, NULL );
+     rb_3 = CreateWindowEx( 0, "BUTTON", "MiaÂ³ czas wolny lub odpoczywaÂ³", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON , 110, 233, 300, 30, hwnd, (HMENU)53, NULL, NULL );
+     rb_4 = CreateWindowEx( 0, "BUTTON", "ProwadziÂ³ pojazd wyÂ³Â¹czony z zakresu stosowania rozporzÂ¹dzenia (WE) nr 561/2006 lub AETR", WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTORADIOBUTTON , 110, 263,410, 40, hwnd, (HMENU)54, NULL, NULL );
+     rb_5 = CreateWindowEx( 0, "BUTTON", "WykonywaÂ³ pracÃª innÂ¹ niÂ¿ prowadzenie pojazdu", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 300, 350, 30, hwnd, (HMENU)55, NULL, NULL );
+     rb_6 = CreateWindowEx( 0, "BUTTON", "PozostawaÂ³ w gotowoÅ“ci", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 110, 330, 300, 30, hwnd, (HMENU)56, NULL, NULL );
      lb_6 = CreateWindow("STATIC","Miejsce: ", WS_CHILD | WS_VISIBLE | SS_RIGHT, 15, 363, 80, 25, hwnd, (HMENU)16, NULL, hwnd);
      eb_place = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT","", WS_CHILD | WS_VISIBLE | WS_BORDER, 110, 360, 150, 25, hwnd, (HMENU)6, NULL, hwnd);
      bt_save = CreateWindow("Button", "Zapisz i drukuj", WS_CHILD | WS_VISIBLE | SS_CENTER , 158, 405, 110, 25, hwnd, (HMENU)7, NULL, hwnd); 
@@ -1142,7 +1142,7 @@ LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM
     
     switch (message)                  /* handle the messages */
     {
-    case WM_COMMAND: //obsluga klikniêcia w kontrolkê
+    case WM_COMMAND: //obsluga klikniÃªcia w kontrolkÃª
           switch(LOWORD(wParam)) //numer kontrolki
           {            
                 case 1: //Combo firma
@@ -1177,7 +1177,7 @@ LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM
    
                      if(len_place == 0 || atoi(TheDriver.id) == 0)
                      {
-                     showMessage("Wpisz miasto i/lub kierowcê!");     
+                     showMessage("Wpisz miasto i/lub kierowcÃª!");     
                      }
                      else
                      {
@@ -1220,13 +1220,13 @@ LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM
                 case 8: //Button exit
                      PostQuitMessage (0);
                      break; 
-			    case 101: //Zakoñczenie programu
+			    case 101: //ZakoÃ±czenie programu
 			         PostQuitMessage (0);
 				     break;	
 				case 102: //Edycja danych firmy
 				     if(TheSpeditor.id == 0)
 				     {
-				     	showMessage("Wybierz pracownika aby zmieniæ dane jego pracodawcy");
+				     	showMessage("Wybierz pracownika aby zmieniÃ¦ dane jego pracodawcy");
 					 }
 					 else
 					 {
@@ -1237,7 +1237,7 @@ LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM
 				case 103: //Edycja danych kierowcy
  					 if(TheDriver.id == 0)
 				     {
-				     	showMessage("Wybierz pracownika aby zmieniæ jego dane");
+				     	showMessage("Wybierz pracownika aby zmieniÃ¦ jego dane");
 					 }
 					 else
 					 {
@@ -1257,7 +1257,7 @@ LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM
 				     hDialog = DialogBox( GetModuleHandle( NULL ), MAKEINTRESOURCE( 300 ), hwnd, DlgDriverProc);
 				     break;              
            }
-      break; //koniec obs³ugi klikniêcia na kontrolkê
+      break; //koniec obsÂ³ugi klikniÃªcia na kontrolkÃª
       
       case WM_CTLCOLORSTATIC: //obsluga kolorow w kontrolkach            
            hItem = (HWND) lParam;
